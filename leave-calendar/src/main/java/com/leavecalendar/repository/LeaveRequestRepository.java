@@ -20,8 +20,6 @@ public interface LeaveRequestRepository extends JpaRepository<LeaveRequest, Long
 
     List<LeaveRequest> findByTeamMemberAndStatus(TeamMember teamMember, LeaveStatus status);
 
-    // Overlap ellenőrzés: van-e már jóváhagyott vagy függőben lévő kérelem
-    // ami átfedi az új kérelem időszakát?
     @Query("""
         SELECT COUNT(lr) > 0 FROM LeaveRequest lr
         WHERE lr.teamMember = :member
@@ -37,7 +35,6 @@ public interface LeaveRequestRepository extends JpaRepository<LeaveRequest, Long
             @Param("excludeId") Long excludeId
     );
 
-    // On-call konfliktus ellenőrzéshez: adott időszakban van-e approved leave?
     @Query("""
         SELECT lr FROM LeaveRequest lr
         WHERE lr.teamMember = :member

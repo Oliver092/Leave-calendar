@@ -70,7 +70,6 @@ class OnCallServiceTest {
     void getOnCallSchedule_hasConflict_whenApprovedLeaveExists() {
         when(teamMemberService.getAllMembers()).thenReturn(members);
 
-        // Első héten conflict, többinél nem
         when(leaveRequestRepository.findApprovedLeavesInPeriod(any(), any(), any()))
                 .thenReturn(Collections.emptyList());
         when(leaveRequestRepository.findApprovedLeavesInPeriod(
@@ -79,7 +78,6 @@ class OnCallServiceTest {
 
         List<OnCallService.OnCallWeek> schedule = onCallService.getOnCallSchedule(4);
 
-        // Legalább egy hétnek conflict-ja van
         assertTrue(schedule.stream().anyMatch(OnCallService.OnCallWeek::hasConflict));
     }
 
@@ -100,7 +98,6 @@ class OnCallServiceTest {
 
         List<OnCallService.OnCallWeek> schedule = onCallService.getOnCallSchedule(8);
 
-        // Az 1. és 5. hét ugyanaz a személy
         assertEquals(
                 schedule.get(0).onCallMember().getName(),
                 schedule.get(4).onCallMember().getName()

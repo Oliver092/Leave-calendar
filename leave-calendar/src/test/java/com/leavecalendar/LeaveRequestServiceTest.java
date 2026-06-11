@@ -70,9 +70,6 @@ class LeaveRequestServiceTest {
                 LocalDate.of(2026, 7, 5),
                 "Invalid"
         );
-
-//        when(teamMemberService.getById(1L)).thenReturn(alice);
-
         assertThrows(IllegalArgumentException.class,
                 () -> leaveRequestService.create(invalidDTO));
 

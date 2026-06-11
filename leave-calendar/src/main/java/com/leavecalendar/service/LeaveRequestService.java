@@ -58,7 +58,6 @@ public class LeaveRequestService {
         LeaveRequest request = leaveRequestRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Leave request not found: " + id));
 
-        // Ha APPROVED-ra változik, overlap ellenőrzés a többiekkel
         if (newStatus == LeaveStatus.APPROVED) {
             boolean overlap = leaveRequestRepository.existsOverlap(
                     request.getTeamMember(),

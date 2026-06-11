@@ -19,7 +19,6 @@ public class OnCallService {
     private final TeamMemberService teamMemberService;
     private final LeaveRequestRepository leaveRequestRepository;
 
-    // Visszaadja az adott hét on-call személyét
     public TeamMember getOnCallForWeek(LocalDate anyDayInWeek) {
         List<TeamMember> members = teamMemberService.getAllMembers();
         if (members.isEmpty()) return null;
@@ -29,11 +28,9 @@ public class OnCallService {
         return members.get(index);
     }
 
-    // Visszaadja a következő N hét on-call rotációját konfliktus jelzéssel
     public List<OnCallWeek> getOnCallSchedule(int numberOfWeeks) {
         List<OnCallWeek> schedule = new ArrayList<>();
         LocalDate today = LocalDate.now();
-        // Hétfőre igazítás
         LocalDate monday = today.minusDays(today.getDayOfWeek().getValue() - 1);
 
         for (int i = 0; i < numberOfWeeks; i++) {
@@ -51,7 +48,6 @@ public class OnCallService {
         return schedule;
     }
 
-    // Belső DTO az on-call hét adataihoz
     public record OnCallWeek(
             LocalDate weekStart,
             LocalDate weekEnd,
