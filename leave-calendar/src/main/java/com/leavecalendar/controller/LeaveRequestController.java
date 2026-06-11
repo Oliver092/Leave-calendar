@@ -2,9 +2,7 @@ package com.leavecalendar.controller;
 
 import com.leavecalendar.model.LeaveRequest;
 import com.leavecalendar.model.LeaveStatus;
-import com.leavecalendar.model.TeamMember;
 import com.leavecalendar.service.LeaveRequestService;
-import com.leavecalendar.service.TeamMemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +18,6 @@ import java.util.List;
 public class LeaveRequestController {
 
     private final LeaveRequestService leaveRequestService;
-    private final TeamMemberService teamMemberService;
 
     @GetMapping
     public ResponseEntity<List<LeaveRequest>> getAll(

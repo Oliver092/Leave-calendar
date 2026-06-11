@@ -18,8 +18,6 @@ public interface LeaveRequestRepository extends JpaRepository<LeaveRequest, Long
 
     List<LeaveRequest> findByStatus(LeaveStatus status);
 
-    List<LeaveRequest> findByTeamMemberAndStatus(TeamMember teamMember, LeaveStatus status);
-
     @Query("""
         SELECT COUNT(lr) > 0 FROM LeaveRequest lr
         WHERE lr.teamMember = :member
